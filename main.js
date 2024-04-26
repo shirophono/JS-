@@ -9,7 +9,6 @@ var elapsedTime = 0;  //経過時間
 var holdTime = 0;     //停止時間保持用
 
 
-//onclickのイベント属性をhtmlに入れてるのに下記のDOM呼び出しが必要なのはなぜ→消してみたらボタン３種類とも押せなくなった
 window.onload = function () {
     startButton = document.getElementById("start");
     stopButton = document.getElementById("stop");
@@ -47,14 +46,11 @@ function reset(){
     resetButton.disabled = true;
 }
 
-//measureTimeは関数名　function 関数名(引数)　{実行したい処理}　
 function measureTime() {
-    //setInterval()を使用しないのはなぜ？　clearIntervalを使用しているのに→setIntervalに変更してみたら、ストップとリセットが押せなくなって止まらなくなった
     timer = setTimeout(function () {
         elapsedTime = Date.now() - startTime + holdTime;
         showTime.textContent = new Date(elapsedTime).toISOString().slice(11,22);
         measureTime();
     }, 10);
-    //measureTimeの中でmeasureTimeを呼び出しているのはなぜ？→繰り返し実行させるため？→これを消すと0.01でカウントが止まる
-    //10の意味の意味は？→1/100秒の速さでsetTimeoutを動かしている？
+
 }
